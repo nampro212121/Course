@@ -30,12 +30,19 @@
         <div class="detail_info-course">
             <div class="box-info">
                 <span>
-                    <button id="cart" href="" v-on:click="AddtoCart()">Thêm vào giỏ hàng</button>
+                    <button id="cart" href="" v-on:click="added(1,2,3,4)">Thêm vào giỏ hàng</button>
                     <button id="sub" href="" >Đăng kí khóa học</button>
                 </span>
                 <div class="price">
                     <h3>Học trọn gói với: </h3>
-                    <p class="cost">{{DetailCourse.coursePriceDiscount }} đồng</p>
+                    <div class="style-1">
+                    <del>
+                        <span class="amount">{{DetailCourse.coursePrice }} đồng</span>
+                    </del>
+                    <ins>
+                        <span class="amount">{{DetailCourse.coursePriceDiscount }} đồng</span>
+                    </ins>
+                    </div>
                 </div>
                 <div class="info">
                     <p>Thời gian học dự kiến: <b>{{DetailCourse.courseEstimatedStudyTime}}</b></p>
@@ -104,24 +111,49 @@
             <div class="modal-content">
                 <span v-on:click="CloseModal()" class="close">&times;</span>
                 <div class="cart-content">
-                    <table class="cart-content" style="width:100%">
+                    <table class="cart-table" style="width:100%;">
                     <tr id="item-course" >
-                        <td class="item-image" style="width:30%">
+                        <td class="item-image" >
                             <img class="" src="https://giuseart.com/wp-content/uploads/2017/10/Banner-Kh%C3%B3a-h%E1%BB%8Dc-Ti%E1%BA%BFng-Anh-3.jpg" alt="">
                         </td>
-                        <td class="item-title" style="width:30%">
-                            <h3></h3>
-                            <p>aaaaaaaaaassssssssssssssssssssssssssssssss</p>
-                            <p>aaaaaaaaaa</p>
-                        </td>
-                        <td style="width:30%">
-                            <p>aaaaaaaaaa</p>
-                            <p>aaaaaaaaaa</p>
+                        <td class="item-title" >
+                            <h3 style="color:#0071c5">Khóa học tiếng Nhật sơ cấp 1</h3>
+                            <div style="float:left">
+                                <p>Thời gian học dự kiến:</p>
+                                <p>Giáo trình:</p>
+                                <p>Giá khóa học:</p>
+                            </div>
+                            <div style="float:left;padding-left:40px;font-weight:600">
+                                <p>12 tiếng</p>
+                                <p>48 bài</p>
+                                <p>200,000 Đồng</p>
+                            </div>
                         </td>
                         <td class="item-close" style="width:10%" v-on:click="CloseItemCourse()">❌</td>
                     </tr>
+                    <tr id="item-course">
+                        <td class="item-image" >
+                            <img class="" src="https://giuseart.com/wp-content/uploads/2017/10/Banner-Kh%C3%B3a-h%E1%BB%8Dc-Ti%E1%BA%BFng-Anh-3.jpg" alt="">
+                        </td>
+                        <td class="item-title" >
+                            <h3 style="color:#0071c5">Khóa học tiếng Nhật sơ cấp 1</h3>
+                            <div style="float:left">
+                                <p>Thời gian học dự kiến:</p>
+                                <p>Giáo trình:</p>
+                                <p>Giá khóa học:</p>
+                            </div>
+                            <div style="float:left;padding-left:40px;font-weight:600">
+                                <p>12 tiếng</p>
+                                <p>48 bài</p>
+                                <p>200,000 Đồng</p>
+                            </div>
+                        </td>
+                        <td class="item-close" style="width:10%" v-on:click="CloseItemCourse()">❌</td>
+                    </tr>
+                    
                     <tr>
                         <td class="item-total"><p>Tổng tiền:<span><b> 2,500,000 </b></span></p></td>
+                        <td></td>
                     </tr>
                     </table>
                     <button class="submit">Đăng ký khóa học</button>
@@ -142,8 +174,7 @@ export default {
           content : true,
           catalog : true,
           DetailCourse : {},
-          shopping_cart : {},
-          data : {name:'Nhat',age:17}
+          cartadd: { id: "", name: "", price: "", image: "", },
       }
   },
   methods: {
@@ -163,12 +194,26 @@ export default {
       CloseItemCourse(){
           document.getElementById("item-course").style.display = "none"
       },
-      AddtoCart(){
-          document.cookie = `myContents= ${this.data}; expires=Sun, 12 Dec 2021 12:00:00 UTC; path=/`;
-      }
+      added(id,name,price,image){
+             // cartadd is here to get all things that click or chosen by user 
+             this.cartadd.id = id; 
+             this.cartadd.name = name; 
+             this.cartadd.price = price; 
+             this.cartadd.image = image; 
+             this.cartadd.qty = 1; 
+             this.cart.push(this.cartadd); 
+             this.cartadd = {}; 
+             this.saveCats(); // this function most important to save all inform of products 
+        },
+        saveCats() {
+        // for save in local storage set the below code 
+            let parsed = JSON.stringify(this.cart); 
+            localStorage.setItem("cart", parsed); 
+            this.viewCart(); // by this function we can see all products are save in web },
+        },
   },
   created() {
-this.DetailCourse = 
+    this.DetailCourse = 
     {
 "courseId": 5636,
 "teacher" :
@@ -194,14 +239,16 @@ this.DetailCourse =
 "coursePriceDiscountTime" : "2021-9-17",
 "courseContentDetails" : "Tiếng Nhật giao tiếp 1",
 "courseListCurrilum" : "Tiếng Nhật giao tiếp 1"
-}
-
+    }
  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container{
+    width: 100%;
+}
 .flex-container {
   display: flex;
 }
@@ -246,7 +293,7 @@ this.DetailCourse =
 }
 .flex-container .detail_course h3 {
   color: #ffff;
-  font-size: 24px;
+  font-size: 20px;
   padding: 5px;
 }
 .flex-container .detail_course p {
@@ -279,7 +326,7 @@ this.DetailCourse =
   color: rgb(250, 18, 18);
 }
 .flex-container .detail_info-course .info p{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
 .detail_info-course .box-info span #cart{
@@ -288,7 +335,7 @@ this.DetailCourse =
     border-radius: 10px;
     text-decoration: none;
     color: #ffff;
-    font-size: 24px;
+    font-size: 20px;
     margin: 10px 10px 10px 0px;
     font-weight: 600;
 }
@@ -298,7 +345,7 @@ this.DetailCourse =
     border-radius: 10px;
     text-decoration: none;
     color: #ffff;
-    font-size: 24px;
+    font-size: 20px;
     margin: 10px 10px 10px 0px;
     font-weight: 600;
 }
@@ -315,6 +362,9 @@ this.DetailCourse =
     cursor: pointer;
     line-height: 5px;
 }
+.header-tab p{
+    margin: 0px;
+}
 .catalog-course .content{
     padding: 10px 20px;
 }
@@ -323,7 +373,7 @@ this.DetailCourse =
 }
 .lesson_content tr td{
     padding: 10px 50px;
-    font-size: 18px;
+    font-size: 16px;
 }
 /* The Modal (background) */
 .modal {
@@ -347,6 +397,7 @@ this.DetailCourse =
   padding: 20px;
   border: 1px solid #888;
   width: 70%;
+  border-radius: 10px;
 }
 
 /* The Close Button */
@@ -379,10 +430,10 @@ this.DetailCourse =
 }
 .modal-content .cart-content .submit{
     padding: 10px 20px;
-    background: #000099;
+    background: #0071c5;
     border: none;
     color: #ffff;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 5px;
     display: block;
     margin: 0px auto;
@@ -405,6 +456,44 @@ this.DetailCourse =
     position: absolute;
     right: 0px;
 }
+/* Price */
+   .style-1 del {
+    color: blue;
+    text-decoration: none;
+    position: relative;
+    font-size: 25px;
+    font-weight: 700;
+   }
+    .style-1 del ::before {
+      content: " ";
+      display: block;
+      width: 100%;
+      border-top: 2px solid #cb0d0d;
+      height: 12px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: rotate(-7deg);
+    }
+  ins {
+    color: #cb0d0d;
+    font-size: 35px;
+    text-decoration: none;
+    padding: 1em 1em 1em .5em;
+    font-weight: 700;
+  }
+@media only screen and (max-width: 1100px) {
+    .flex-container > .media-teacher{
+        width: 30%;
+    }
+    /* Price */
+   .style-1 del{
+       font-size: 20px;
+   }
+   ins {
+       font-size: 25px;
+   }
+}
 @media only screen and (max-width: 600px) {
     .flex-container {
     display: flex;
@@ -421,20 +510,20 @@ this.DetailCourse =
     width:100%;
     }
     .flex-container > .media-course {
-    margin: 10px;
-    padding: 20px;
+    margin: 0px;
+    padding: 0px;
     width:100%;
     }
     .flex-container .detail_info-course{
-    margin: 10px;
-    padding: 20px;
+    margin: 0px;
+    padding: 10px;
     width:100%;  
     }
     .detail_info-course .box-info span #cart{
-        width: 100%;
+        width: 80%;
     }
     .detail_info-course .box-info span #sub{
-        width: 100%;
+        width: 80%;
     }
     /* Modal Content */
     .modal-content {
@@ -444,5 +533,18 @@ this.DetailCourse =
     border: 1px solid #888;
     width: 90%;
     }
+    .modal-content .cart-content .cart-table td{
+        display: block;
+    }
+    .lesson_content tr td{
+        padding: 10px;
+    }
+    /* Price */
+   .style-1 del{
+       font-size: 20px;
+   }
+   ins {
+       font-size: 25px;
+   }
 }
 </style>

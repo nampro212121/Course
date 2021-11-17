@@ -18,20 +18,25 @@
                     <div class="rating">
                         <div class="rate">
                             <p class="title-comment">Đánh giá của bạn về khóa học</p>
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text"></label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text"></label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text"></label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text"></label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text"></label>
+                            <div id="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                            </div>
                         </div>
                     </div>
                     <div class="comment-fill">
-                        <p class="title-comment">Cảm nhận của bạn về khóa học này</p>
                         <textarea name="" id="" cols="30" rows="10"></textarea>
                     </div>
                     <button class="submit">Gửi đánh giá</button>
@@ -141,6 +146,9 @@ export default {
     cursor: pointer;
     line-height: 5px;
 }
+.header-tab span p{
+    margin: 0px;
+}
 .container-comment .comment{
     display: flex;
     border: 1px solid #0071c5;
@@ -165,7 +173,7 @@ export default {
   padding: 10px;
   width: 80%;
     display: -webkit-box;
-    max-height: 6.2rem;
+    max-height: 6rem;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -222,6 +230,7 @@ export default {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+  border-radius: 10px;
 }
 
 /* The Close Button */
@@ -238,40 +247,7 @@ export default {
   text-decoration: none;
   cursor: pointer;
 }
-.rate {
 
-}
-.rate:not(:checked) > input {
- float:left;
- display: none;
-}
-.rate:not(:checked) > label {
-    display: right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-    font-size: 100%
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
 #myModal .modal-content .title-course{
     font-size: 22px;
     font-weight:600;
@@ -305,4 +281,19 @@ export default {
         width: 90%;
     }
 }
+
+#rating{border:none;float: left;margin-bottom: 10px;}
+#rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+#rating>label:before{margin:5px;font-size:30px;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+#rating>.half:before{content:"\f089"; font-size: 200%;}/*0.5 ngôi sao*/
+#rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+/*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+#rating>input:checked~label,
+#rating:not(:checked)>label:hover, 
+#rating:not(:checked)>label:hover~label{color:#FFD700; cursor: pointer;}
+/* Hover vào các sao phía trước ngôi sao đã chọn*/
+#rating>input:checked+label:hover,
+#rating>input:checked~label:hover,
+#rating>label:hover~input:checked~label,
+#rating>input:checked~label:hover~label{color:#FFED85;}
 </style>

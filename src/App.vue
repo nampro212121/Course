@@ -3,6 +3,7 @@
   <TeacherInfo/>
   <Comment/>
   <Subscribe/>
+  <SubscribeSuccess/>
 </template>
 
 <script>
@@ -11,11 +12,12 @@ import Catalog from './components/Catalog.vue'
 import TeacherInfo from './components/DetailCourse/TeacherInfo.vue'
 import Comment from './components/DetailCourse/Comment.vue'
 import Subscribe from './components/Subscribe.vue'
+import SubscribeSuccess from './components/SubscribeSuccess.vue'
 export default {
   name: 'App',
   components: {
     // Home
-    Catalog,TeacherInfo,Comment,Subscribe
+    Catalog,TeacherInfo,Comment,Subscribe,SubscribeSuccess
   }
 }
 </script>
@@ -32,10 +34,9 @@ body{
   margin: 0px;
   padding: 0px;
 }
-p{
-  margin-bottom: 10px;
-  margin-top:10px;
-  font-size: 18px;
+p,label,th,td{
+  line-height: 22px;
+  font-size: 16px;
 }
 @media only screen and (max-width: 600px) {
   p{
@@ -57,6 +58,15 @@ p{
   }
   h5{
     font-size: 16px;
+  }
+  th{
+    font-size: 14px;
+  }
+  td{
+    font-size: 14px;
+  }
+  label{
+    font-size: 14px;
   }
 }
 </style>

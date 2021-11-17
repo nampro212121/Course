@@ -13,13 +13,33 @@
             <h3>Thông tin chuyển khoản<!--  -->
             </h3>
             <div class="main">
-                <div class="info-transfer">
-                    <p class="title">Thông tin chuyển khoản</p>
-                    <p class="ty">Công ty ACB</p>
-                    <p class="ty">Số tài khoản <span><b>12344354678</b></span></p>
-                    <p class="ty">Tên ngân hàng <span><b>Đông á Bank</b></span></p>
-                    <p class="ty">Số tiền <span><b>600,000 Đồng</b></span></p>
-                    <p class="ty">Nội dung chuyển khoản</p>
+                <div class="info-transfer" >
+                    <div class="info-bank">
+                        <div class="info">
+                        <p class="ty">Công ty ACB</p>
+                        <p class="ty">Số tài khoản <span><b>12344354678</b></span></p>
+                        <p class="ty">Tên ngân hàng <span><b>Đông á Bank </b></span></p>
+                        </div>
+                        <div class="info">
+                            <p class="ty">Công ty ACB</p>
+                            <p class="ty">Số tài khoản <span><b>12344354678</b></span></p>
+                            <p class="ty">Tên ngân hàng <span><b>Đông á Bank</b></span></p>
+                        </div>
+                        <div class="info">
+                            <p class="ty">Công ty ACB</p>
+                            <p class="ty">Số tài khoản <span><b>12344354678</b></span></p>
+                            <p class="ty">Tên ngân hàng <span><b>Đông á Bank</b></span></p>
+                        </div>
+                        <div class="info">
+                            <p class="ty">Công ty ACB</p>
+                            <p class="ty">Số tài khoản <span><b>12344354678</b></span></p>
+                            <p class="ty">Tên ngân hàng <span><b>Đông á Bank</b></span></p>
+                        </div>
+                    </div>
+                    <div class="synthetic">
+                        <p class="ty">Số tiền <span><b>600,000 Đồng</b></span></p>
+                        <p class="ty">Nội dung chuyển khoản</p>
+                    </div>
                 </div>
                 <div>
                     
@@ -31,7 +51,7 @@
                             <label for="fname">Họ và tên<span>*</span></label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                            <input type="text" id="fname" name="firstname" >
                         </div>
                         </div>
                         <div class="row">
@@ -39,7 +59,7 @@
                             <label for="lname">Địa chỉ mail<span>*</span></label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                            <input type="text" id="lname" name="lastname" >
                         </div>
                         </div>
                         <div class="row">
@@ -47,7 +67,7 @@
                             <label for="lname">Số điện thoại<span>*</span></label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                            <input type="text" id="lname" name="lastname" >
                         </div>
                         </div>
                         <div class="row">
@@ -138,7 +158,7 @@ position: absolute;
 top: 50%;
 left: 0;
 height: 4px;
-width: 550px;
+width: 100%;
 background-color: #BBBBBB;
 z-index: -1;
 }
@@ -185,11 +205,27 @@ z-index: -1;
     width: 40%;
     border: 1px solid #0071c5;
 }
+.info-pay .main .info-transfer .info-bank{
+    display:flex;
+    flex-wrap: wrap;
+}
+.info-pay .main .info-transfer .info-bank .info{
+    flex:45%;
+    margin: 10px;
+    box-shadow: 0px 20px 30px -20px hsl(229, 6%, 66%);
+    border-radius: 5px;
+    padding: 5px;
+    border-top: 3px solid #0071c5;
+}
 .info-pay .main .info-transfer .title{
     text-align: center;
     color: #0071c5;
     font-weight: 400;
     font-size: 20px;
+}
+.info-pay .main .info-transfer .synthetic{
+    border-top: 1px solid #0071c5;
+    margin: 10px;
 }
 .info-pay .main .info-transfer .ty{
     color: #606266;
@@ -213,7 +249,6 @@ input[type=text]{
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
-  font-size:20px
 }
 label span{
     color:rgb(241, 12, 12);
@@ -263,11 +298,14 @@ input[type=submit] {
   display: table;
   clear: both;
 }
+.detail-pay{
+    overflow-x: auto;
+}
 .detail-pay table{
-    width: 90%;
+    width: 1200px;
     margin: 20px auto;
     border-radius: 5px;
-    box-shadow: 0 12px 18px #dadae8;
+    box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
 }
 .detail-pay th {
     text-align: left;
@@ -279,6 +317,8 @@ input[type=submit] {
     text-align: left;
     padding: 20px;
 }
+.detail-pay tr:nth-child(even){background-color: #f2f2f2;}
+.detail-pay tr:hover {background-color: #ddd;}
 .detail-pay table .total p{
     font-size: 18px;
     font-weight: 600;
@@ -301,5 +341,48 @@ input[type=submit] {
     width: 100%;
     margin-top: 0;
   }
+  .info-pay .main .info-transfer{
+    padding: 20px;
+    font-size: 30px;
+    width: 100%;
+    border: 1px solid #0071c5;
+   }
+   .info-pay .main .form-sub{
+    padding: 20px;
+    font-size: 30px;
+    width: 100%;
+    }
+    .info-pay .main .info-transfer .info-bank{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    }
+}
+@media screen and (max-width: 1200px){
+    .info-pay .main .info-transfer .info-bank{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    }
+}
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0071c5; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #025a9e; 
 }
 </style>
